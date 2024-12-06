@@ -1,5 +1,5 @@
 # https://melaniessmoothies-ab8seemypgnkwtsqtdmqbp.streamlit.app/
-# custom sub-domain
+# custom sub-domain:https://apmw-melaniessmoothies-1.streamlit.app/
 # Import python packages
 import streamlit as st
 # from snowflake.snowpark.context import get_active_session
