@@ -1,6 +1,7 @@
 # https://melaniessmoothies-ab8seemypgnkwtsqtdmqbp.streamlit.app/
 # custom sub-domain:https://apmw-melaniessmoothies-1.streamlit.app/
 # Import python packages
+import requests
 import streamlit as st
 # from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
@@ -26,14 +27,12 @@ ingredients_list = st.multiselect('Choose up to 5 ingredients: '
                                  )
 
 if ingredients_list:
-    st.write(ingredients_list)
-    st.text(ingredients_list)
-    
     ingredients_string = ''
 
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
-    st.write(ingredients_string)
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True )
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, NAME_ON_ORDER)
             values ('""" + ingredients_string + """','"""+name_on_order+ """')"""
@@ -48,8 +47,3 @@ if ingredients_list:
 
         st.success('Your Smoothie is ordered, ' +name_on_order+ ' !', icon="✅")
 
-# New section to display Smoothiefruit nutrition information
-import requests
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-#st.text(smoothiefroot_response.json)
-sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True )
