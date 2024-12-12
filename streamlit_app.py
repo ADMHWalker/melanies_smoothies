@@ -3,8 +3,7 @@
 # Import python packages
 import requests
 import streamlit as st
-#import Pandas as pd
-# from snowflake.snowpark.context import get_active_session
+import pandas as pd
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
